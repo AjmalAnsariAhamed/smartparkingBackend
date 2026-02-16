@@ -1,0 +1,54 @@
+package com.smartparking.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class BookingDTO {
+
+    private Long id;
+
+    @NotNull(message = "Parking spot ID is required")
+    private Long parkingSpotId;
+
+    @NotNull(message = "Start time is required")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startTime;
+
+    @NotNull(message = "End time is required")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endTime;
+
+    private Double totalPrice;
+    @NotNull(message = "Vehicle type is required")
+    private com.smartparking.entity.VehicleType vehicleType;
+    private String status;
+    private String parkingSpotName;
+    private String paymentMethod;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
+
+    // User Details for Provider
+    private String userName;
+    private String userEmail;
+    private String userPhone;
+
+    // Rating
+    private boolean isRated;
+    private Integer ratingValue;
+
+    // Financials (Commission)
+    private Double platformFee;
+    private Double providerEarnings;
+
+    // Computed status for UI (e.g., ACTIVE vs CONFIRMED)
+    private String computedStatus;
+}
